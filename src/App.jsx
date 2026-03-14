@@ -123,9 +123,6 @@ function App() {
                 <p>
                   <a href="mailto:kontakt@bitzli.de">kontakt@bitzli.de</a>
                 </p>
-
-                <h3>Telefon</h3>
-                <p>+49 123 456789</p>
               </div>
 
               <form className="contact__form" onSubmit={(event) => event.preventDefault()}>
