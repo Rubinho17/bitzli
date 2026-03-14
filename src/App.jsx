@@ -1,25 +1,25 @@
 import { useMemo, useState } from 'react';
 import './App.css';
-import Logo from './assets/logo.svg';
+import Logo from './assets/bitzli_logo.png';
 
 const eventsData = [
   {
     id: 'e-1',
-    title: 'Frühlingsfest im Park',
-    date: 'Sa, 18. April 2026',
-    description: 'Gemeinsamer Spaziergang, Spiele & gemütliches Beisammensein mit Kuchenbuffet.'
+    title: 'Barbecue & Rock',
+    date: 'Sa,11. Juli 2026',
+    description: 'Barbecue und Live-Musik im Hof Schänis.'
   },
   {
     id: 'e-2',
-    title: 'Workshop: Urban Gardening',
-    date: 'Mi, 29. April 2026',
-    description: 'Lerne, wie man auf kleinem Raum nachhaltiges Gemüse und Kräuter anbaut.'
+    title: 'Event 2',
+    date: 'Sa, 26. September 2026',
+    description: 'Beschreibung Event 2.'
   },
   {
     id: 'e-3',
-    title: 'Konzertabend im Gemeindehaus',
-    date: 'Fr, 10. Mai 2026',
-    description: 'Live-Musik von lokalen Bands, Getränke & Open-Stage für Talente.'
+    title: 'Event 3',
+    date: 'Fr, 30. November 2026',
+    description: 'Beschreibung Event 3.'
   }
 ];
 
@@ -32,9 +32,10 @@ function App() {
       <header className="hero">
         <div className="hero__content">
           <img className="hero__logo" src={Logo} alt="Bitzli Logo" />
-          <h1 className="hero__title">Bitzli e.V.</h1>
+          <h1 className="hero__title">Bitzli Events</h1>
           <p className="hero__subtitle">
-            Gemeinsam gestalten wir Veranstaltungen für unsere Nachbarschaft.
+            Eifach überall bitzli besser <br />
+            Gemeinsam gestalten wir Veranstaltungen in unserer Umgebung.
           </p>
           <a className="hero__cta" href="#events">
             Jetzt Events entdecken
@@ -90,17 +91,16 @@ function App() {
                 </p>
               </div>
               <div className="card">
-                <h3>Mitmachen</h3>
-                <p>
-                  Du kannst bei uns aktiv werden oder einfach an unseren Veranstaltungen teilnehmen. Jeder
-                  ist willkommen – bring dich ein, so viel du willst.
-                </p>
-              </div>
-              <div className="card">
                 <h3>Transparenz</h3>
                 <p>
                   Wir kommunizieren Termine, Themen und Entscheidungen offen. Bei unseren Treffen sind alle
                   Stimmen wichtig.
+                </p>
+              </div>
+              <div className="card">
+                <h3>Offenheit</h3>
+                <p>
+                  Bei unseren Events ist jeder willkommen – egal ob jung oder alt, mit oder ohne Vorerfahrung. Wir freuen uns auf euch.
                 </p>
               </div>
             </div>
@@ -117,7 +117,7 @@ function App() {
             <div className="contact">
               <div className="contact__info">
                 <h3>Adresse</h3>
-                <p>Vereinsheim Bitzli<br />Beispielstraße 12<br />12345 Musterstadt</p>
+                <p>Bitzli Events<br />Beispielstraße 12<br />12345 Musterstadt</p>
 
                 <h3>Mail</h3>
                 <p>
