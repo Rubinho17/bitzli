@@ -137,6 +137,55 @@
   color: var(--color-muted);
 }
 
+.event-card__location,
+.event-card__hint {
+  margin: 4px 0 0;
+  color: var(--color-muted);
+}
+
+.event-card__hint {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.event-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 999;
+  padding: 20px;
+}
+
+.event-modal__content {
+  width: min(540px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.event-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--color-text);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
 .event-cta {
   margin-top: 40px;
   padding: 24px;

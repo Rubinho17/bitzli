@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import Logo from './assets/bitzli_logo.png';
 
@@ -6,26 +6,52 @@ const eventsData = [
   {
     id: 'e-1',
     title: 'Barbecue & Rock',
-    date: 'Sa,11. Juli 2026',
-    description: 'Barbecue und Live-Musik im Hof Schänis.'
+    date: 'Sa, 11. Juli 2026',
+    time: '17:30 - 23:00',
+    location: 'Hof Schänis, Dorfstrasse 8',
+    description: 'Barbecue und Live-Musik im Hof Schänis.',
+    details: 'Geniesse Grill-Spezialitäten, Bier und regionale Bands unter freiem Himmel. Anmeldung empfohlen.'
   },
   {
     id: 'e-2',
-    title: 'Event 2',
+    title: 'Street Art Tour',
     date: 'Sa, 26. September 2026',
-    description: 'Beschreibung Event 2.'
+    time: '15:00 - 18:00',
+    location: 'Start: Bahnhofplatz',
+    description: 'Geführte Tour durch urbane Kunstwerke.',
+    details: 'Treffpunkt am Bahnhof, bequeme Schuhe tragen. Dauer ca. 3 Stunden, Regenjacke mitnehmen.'
   },
   {
     id: 'e-3',
-    title: 'Event 3',
+    title: 'Wintermarkt',
     date: 'Fr, 30. November 2026',
-    description: 'Beschreibung Event 3.'
+    time: '10:00 - 20:00',
+    location: 'Marktplatz',
+    description: 'Markt mit Kunsthandwerk, Punsch und Musik.',
+    details: 'Viele lokale Anbieter und eine Bühne mit Live-Acts. Eintritt frei.'
   }
 ];
 
 function App() {
   const [events] = useState(eventsData);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const nextEvent = useMemo(() => events[0], [events]);
+
+  const openEventDetails = (event) => setSelectedEvent(event);
+  const closeEventDetails = () => setSelectedEvent(null);
+
+  useEffect(() => {
+    if (!selectedEvent) return;
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeEventDetails();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedEvent]);
 
   return (
     <div className="app">
@@ -53,13 +79,29 @@ function App() {
 
             <div className="events">
               {events.map((event) => (
-                <article key={event.id} className="event-card">
+                <article key={event.id} className="event-card" onClick={() => openEventDetails(event)} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openEventDetails(event); }}>
                   <h3 className="event-card__title">{event.title}</h3>
-                  <p className="event-card__date">{event.date}</p>
+                  <p className="event-card__date">{event.date} | {event.time}</p>
+                  <p className="event-card__location">{event.location}</p>
                   <p className="event-card__description">{event.description}</p>
+                  <p className="event-card__hint">Klicke hier für Details</p>
                 </article>
               ))}
             </div>
+
+            {selectedEvent && (
+              <div className="event-modal" onClick={closeEventDetails} role="dialog" aria-modal="true" aria-label="Event Details">
+                <div className="event-modal__content" onClick={(e) => e.stopPropagation()}>
+                  <button className="event-modal__close" onClick={closeEventDetails} aria-label="Schliessen">×</button>
+                  <h3>{selectedEvent.title}</h3>
+                  <p><strong>Datum:</strong> {selectedEvent.date}</p>
+                  <p><strong>Uhrzeit:</strong> {selectedEvent.time}</p>
+                  <p><strong>Ort:</strong> {selectedEvent.location}</p>
+                  <p><strong>Beschreibung:</strong> {selectedEvent.description}</p>
+                  <p>{selectedEvent.details}</p>
+                </div>
+              </div>
+            )}
 
             <div className="event-cta">
               <p>
@@ -117,11 +159,11 @@ function App() {
             <div className="contact">
               <div className="contact__info">
                 <h3>Adresse</h3>
-                <p>Bitzli Events<br />Beispielstraße 12<br />12345 Musterstadt</p>
+                <p>Bitzli Events<br />Rüti Dorf<br />8718 Schänis</p>
 
                 <h3>Mail</h3>
                 <p>
-                  <a href="mailto:kontakt@bitzli.de">kontakt@bitzli.de</a>
+                  <a href="mailto:kontakt@bitzli.de">bitzli@??.ch</a>
                 </p>
               </div>
 
