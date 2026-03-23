@@ -10,16 +10,18 @@ const eventsData = [
     time: '17:30 - 23:00',
     location: 'Hof Schänis, Dorfstrasse 8',
     description: 'Barbecue und Live-Musik im Hof Schänis.',
-    details: 'Geniesse Grill-Spezialitäten, Bier und regionale Bands unter freiem Himmel. Anmeldung empfohlen.'
+    details: 'Geniesse Grill-Spezialitäten, Bier und regionale Bands unter freiem Himmel. Anmeldung empfohlen.',
+    images: []
   },
   {
     id: 'e-2',
-    title: 'Street Art Tour',
+    title: 'Event 2',
     date: 'Sa, 26. September 2026',
     time: '15:00 - 18:00',
     location: 'Start: Bahnhofplatz',
     description: 'Geführte Tour durch urbane Kunstwerke.',
-    details: 'Treffpunkt am Bahnhof, bequeme Schuhe tragen. Dauer ca. 3 Stunden, Regenjacke mitnehmen.'
+    details: 'Treffpunkt am Bahnhof, bequeme Schuhe tragen. Dauer ca. 3 Stunden, Regenjacke mitnehmen.',
+    images: []
   },
   {
     id: 'e-3',
@@ -28,17 +30,29 @@ const eventsData = [
     time: '10:00 - 20:00',
     location: 'Marktplatz',
     description: 'Markt mit Kunsthandwerk, Punsch und Musik.',
-    details: 'Viele lokale Anbieter und eine Bühne mit Live-Acts. Eintritt frei.'
+    details: 'Viele lokale Anbieter und eine Bühne mit Live-Acts. Eintritt frei.',
+    images: []
   }
 ];
 
 function App() {
-  const [events] = useState(eventsData);
+  const [events, setEvents] = useState(eventsData);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const nextEvent = useMemo(() => events[0], [events]);
 
   const openEventDetails = (event) => setSelectedEvent(event);
   const closeEventDetails = () => setSelectedEvent(null);
+
+  const handleImageUpload = (eventId, files) => {
+    const newImages = Array.from(files).map(file => URL.createObjectURL(file));
+    setEvents(prevEvents =>
+      prevEvents.map(event =>
+        event.id === eventId
+          ? { ...event, images: [...event.images, ...newImages] }
+          : event
+      )
+    );
+  };
 
   useEffect(() => {
     if (!selectedEvent) return;
@@ -99,6 +113,30 @@ function App() {
                   <p><strong>Ort:</strong> {selectedEvent.location}</p>
                   <p><strong>Beschreibung:</strong> {selectedEvent.description}</p>
                   <p>{selectedEvent.details}</p>
+
+                  <div className="gallery">
+                    <h4>Event-Galerie</h4>
+                    {selectedEvent.images.length > 0 ? (
+                      <div className="gallery__images">
+                        {selectedEvent.images.map((image, index) => (
+                          <img key={index} src={image} alt={`Event ${selectedEvent.title} ${index + 1}`} className="gallery__image" />
+                        ))}
+                      </div>
+                    ) : (
+                      <p>Noch keine Bilder hochgeladen.</p>
+                    )}
+                    <div className="gallery__upload">
+                      <label htmlFor="image-upload" className="button">Bilder hochladen</label>
+                      <input
+                        id="image-upload"
+                        type="file"
+                        multiple
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={(e) => handleImageUpload(selectedEvent.id, e.target.files)}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -196,7 +234,7 @@ function App() {
 
       <footer className="footer">
         <p>
-          © {new Date().getFullYear()} Bitzli e.V. &bull; Alle Rechte vorbehalten.
+          © {new Date().getFullYear()} Bitzli Events &bull; Alle Rechte vorbehalten.
         </p>
       </footer>
     </div>
