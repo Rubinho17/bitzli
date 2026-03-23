@@ -36,23 +36,12 @@ const eventsData = [
 ];
 
 function App() {
-  const [events, setEvents] = useState(eventsData);
+  const [events] = useState(eventsData);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const nextEvent = useMemo(() => events[0], [events]);
 
   const openEventDetails = (event) => setSelectedEvent(event);
   const closeEventDetails = () => setSelectedEvent(null);
-
-  const handleImageUpload = (eventId, files) => {
-    const newImages = Array.from(files).map(file => URL.createObjectURL(file));
-    setEvents(prevEvents =>
-      prevEvents.map(event =>
-        event.id === eventId
-          ? { ...event, images: [...event.images, ...newImages] }
-          : event
-      )
-    );
-  };
 
   useEffect(() => {
     if (!selectedEvent) return;
@@ -114,29 +103,16 @@ function App() {
                   <p><strong>Beschreibung:</strong> {selectedEvent.description}</p>
                   <p>{selectedEvent.details}</p>
 
-                  <div className="gallery">
-                    <h4>Event-Galerie</h4>
-                    {selectedEvent.images.length > 0 ? (
+                  {selectedEvent.images.length > 0 && (
+                    <div className="gallery">
+                      <h4>Event-Galerie</h4>
                       <div className="gallery__images">
                         {selectedEvent.images.map((image, index) => (
                           <img key={index} src={image} alt={`Event ${selectedEvent.title} ${index + 1}`} className="gallery__image" />
                         ))}
                       </div>
-                    ) : (
-                      <p>Noch keine Bilder hochgeladen.</p>
-                    )}
-                    <div className="gallery__upload">
-                      <label htmlFor="image-upload" className="button">Bilder hochladen</label>
-                      <input
-                        id="image-upload"
-                        type="file"
-                        multiple
-                        accept="image/*"
-                        style={{ display: 'none' }}
-                        onChange={(e) => handleImageUpload(selectedEvent.id, e.target.files)}
-                      />
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             )}
