@@ -6,7 +6,7 @@ const eventsData = [
   {
     id: 'e-1',
     title: 'Barbecue & Rock',
-    date: 'Sa, 11. Juli 2026',
+    date: 'So, 29. März 2026',
     time: '17:30 - 23:00',
     location: 'Hof Schänis, Dorfstrasse 8',
     description: 'Barbecue und Live-Musik im Hof Schänis.',
@@ -38,7 +38,24 @@ const eventsData = [
 function App() {
   const [events] = useState(eventsData);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const nextEvent = useMemo(() => events[0], [events]);
+
+  const parseDate = (dateStr) => {
+    const months = { 'Januar': 0, 'Februar': 1, 'März': 2, 'April': 3, 'Mai': 4, 'Juni': 5, 'Juli': 6, 'August': 7, 'September': 8, 'Oktober': 9, 'November': 10, 'Dezember': 11 };
+    const parts = dateStr.split(', ')[1].split(' ');
+    const day = parseInt(parts[0]);
+    const month = months[parts[1]];
+    const year = parseInt(parts[2]);
+    return new Date(year, month, day);
+  };
+
+  const { upcoming, past } = useMemo(() => {
+    const now = new Date();
+    const upcoming = events.filter(event => parseDate(event.date) >= now);
+    const past = events.filter(event => parseDate(event.date) < now);
+    return { upcoming, past };
+  }, [events]);
+
+  const nextEvent = useMemo(() => upcoming.length > 0 ? upcoming[0] : null, [upcoming]);
 
   const openEventDetails = (event) => setSelectedEvent(event);
   const closeEventDetails = () => setSelectedEvent(null);
@@ -75,22 +92,44 @@ function App() {
       <main>
         <section className="section" id="events">
           <div className="section__inner">
-            <h2 className="section__title">Aktuelle Events</h2>
+            <h2 className="section__title">Events</h2>
             <p className="section__lead">
-              Diese Veranstaltungen planen wir aktuell – sei gern mit dabei.
+ff              Entdecke unsere kommenden und vergangenen Veranstaltungen.
             </p>
 
-            <div className="events">
-              {events.map((event) => (
-                <article key={event.id} className="event-card" onClick={() => openEventDetails(event)} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openEventDetails(event); }}>
-                  <h3 className="event-card__title">{event.title}</h3>
-                  <p className="event-card__date">{event.date} | {event.time}</p>
-                  <p className="event-card__location">{event.location}</p>
-                  <p className="event-card__description">{event.description}</p>
-                  <p className="event-card__hint">Klicke hier für Details</p>
-                </article>
-              ))}
-            </div>
+            {upcoming.length > 0 && (
+              <>
+                <h3>Kommende Events</h3>
+                <div className="events">
+                  {upcoming.map((event) => (
+                    <article key={event.id} className="event-card" onClick={() => openEventDetails(event)} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openEventDetails(event); }}>
+                      <h3 className="event-card__title">{event.title}</h3>
+                      <p className="event-card__date">{event.date} | {event.time}</p>
+                      <p className="event-card__location">{event.location}</p>
+                      <p className="event-card__description">{event.description}</p>
+                      <p className="event-card__hint">Klicke hier für Details</p>
+                    </article>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {past.length > 0 && (
+              <>
+                <h3>Vergangene Events</h3>
+                <div className="events">
+                  {past.map((event) => (
+                    <article key={event.id} className="event-card" onClick={() => openEventDetails(event)} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openEventDetails(event); }}>
+                      <h3 className="event-card__title">{event.title}</h3>
+                      <p className="event-card__date">{event.date} | {event.time}</p>
+                      <p className="event-card__location">{event.location}</p>
+                      <p className="event-card__description">{event.description}</p>
+                      <p className="event-card__hint">Klicke hier für Details</p>
+                    </article>
+                  ))}
+                </div>
+              </>
+            )}
 
             {selectedEvent && (
               <div className="event-modal" onClick={closeEventDetails} role="dialog" aria-modal="true" aria-label="Event Details">
@@ -117,15 +156,17 @@ function App() {
               </div>
             )}
 
-            <div className="event-cta">
-              <p>
-                Nächstes Event: <strong>{nextEvent.title}</strong> am{' '}
-                <strong>{nextEvent.date}</strong>
-              </p>
-              <a className="button" href="#contact">
-                Fragen? Schreib uns!
-              </a>
-            </div>
+            {nextEvent && (
+              <div className="event-cta">
+                <p>
+                  Nächstes Event: <strong>{nextEvent.title}</strong> am{' '}
+                  <strong>{nextEvent.date}</strong>
+                </p>
+                <a className="button" href="#contact">
+                  Fragen? Schreib uns!
+                </a>
+              </div>
+            )}
           </div>
         </section>
 
