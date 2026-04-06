@@ -94,12 +94,12 @@ function App() {
           <div className="section__inner">
             <h2 className="section__title">Events</h2>
             <p className="section__lead">
-ff              Entdecke unsere kommenden und vergangenen Veranstaltungen.
+              Entdecke unsere kommenden und vergangenen Veranstaltungen.
             </p>
 
             {upcoming.length > 0 && (
               <>
-                <h3>Kommende Events</h3>
+                <h3>ffde Events</h3>
                 <div className="events">
                   {upcoming.map((event) => (
                     <article key={event.id} className="event-card" onClick={() => openEventDetails(event)} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openEventDetails(event); }}>
@@ -212,16 +212,6 @@ ff              Entdecke unsere kommenden und vergangenen Veranstaltungen.
             </p>
 
             <div className="contact">
-              <div className="contact__info">
-                <h3>Adresse</h3>
-                <p>Bitzli Events<br />Rüti Dorf<br />8718 Schänis</p>
-
-                <h3>Mail</h3>
-                <p>
-                  <a href="mailto:kontakt@bitzli.de">bitzli@??.ch</a>
-                </p>
-              </div>
-
               <form className="contact__form" onSubmit={(event) => event.preventDefault()}>
                 <label>
                   Dein Name
@@ -247,11 +237,42 @@ ff              Entdecke unsere kommenden und vergangenen Veranstaltungen.
             </div>
           </div>
         </section>
+
+        <section className="section section--alt" id="impressum">
+          <div className="section__inner">
+            <h2 className="section__title">Impressum</h2>
+            <div className="impressum">
+              <h3>Angaben gemäß § 5 TMG</h3>
+              <p>
+                Bitzli Events<br />
+                Rüti Dorf<br />
+                8718 Schänis<br />
+                Schweiz
+              </p>
+
+              <h3>Kontakt</h3>
+              <p>
+                E-Mail: <a href="mailto:info@bitzlievents.ch">info@bitzlievents.ch</a>
+              </p>
+
+              <h3>Vertretungsberechtigte Person</h3>
+              <p>
+                Vorstand: [Name des Vorstands]
+              </p>
+
+              <h3>Haftungsausschluss</h3>
+              <p>
+                Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
+              </p>
+            </div>
+          </div>
+        </section>
+
       </main>
 
       <footer className="footer">
         <p>
-          © {new Date().getFullYear()} Bitzli Events &bull; Alle Rechte vorbehalten.
+          © {new Date().getFullYear()} Bitzli Events &bull; Alle Rechte vorbehalten. &bull; <a href="#impressum">Impressum</a>
         </p>
       </footer>
     </div>
