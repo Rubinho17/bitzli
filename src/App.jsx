@@ -99,7 +99,7 @@ function App() {
 
             {upcoming.length > 0 && (
               <>
-                <h3>ffde Events</h3>
+                <h3>Kommende Events</h3>
                 <div className="events">
                   {upcoming.map((event) => (
                     <article key={event.id} className="event-card" onClick={() => openEventDetails(event)} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openEventDetails(event); }}>

@@ -44,6 +44,4 @@ This will publish the built site to the `gh-pages` branch.
 - `src/App.css` — global styling for layout and theme
 - `vite.config.js` — base path configured for GitHub Pages deployment
 
----
-
 If you want to add more events, update `eventsData` in `src/App.jsx`.
