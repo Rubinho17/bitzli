@@ -1,8 +1,8 @@
 :root {
   --color-bg: #F5F5DC;
-  --color-surface: #E8E8CC;
-  --color-primary: #8B4513;
-  --color-primary-2: #A0522D;
+  --color-surface: #FFFFF0;
+  --color-primary: #555555;
+  --color-primary-2: #666666;
   --color-muted: #696969;
   --color-text: #000000;
   --color-border: rgba(0, 0, 0, 0.16);
@@ -36,8 +36,8 @@
 }
 
 .hero__logo {
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   margin-bottom: 18px;
 }
 
@@ -64,13 +64,13 @@
   color: white;
   text-decoration: none;
   font-weight: 600;
-  box-shadow: 0 18px 30px rgba(139, 69, 19, 0.25);
+  box-shadow: 0 18px 30px rgba(85, 85, 85, 0.25);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .hero__cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 20px 36px rgba(139, 69, 19, 0.28);
+  box-shadow: 0 20px 36px rgba(85, 85, 85, 0.28);
 }
 
 .section {
