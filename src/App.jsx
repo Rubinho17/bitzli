@@ -6,33 +6,14 @@ const eventsData = [
   {
     id: 'e-1',
     title: 'Barbecue & Rock',
-    date: 'So, 29. März 2026',
-    time: '17:30 - 23:00',
+    date: 'So, 12. September 2026',
+    time: '17:00 - 02:00',
     location: 'Hof Schänis, Dorfstrasse 8',
     description: 'Barbecue und Live-Musik im Hof Schänis.',
     details: 'Geniesse Grill-Spezialitäten, Bier und regionale Bands unter freiem Himmel. Anmeldung empfohlen.',
     images: []
   },
-  {
-    id: 'e-2',
-    title: 'Event 2',
-    date: 'Sa, 26. September 2026',
-    time: '15:00 - 18:00',
-    location: 'Start: Bahnhofplatz',
-    description: 'Geführte Tour durch urbane Kunstwerke.',
-    details: 'Treffpunkt am Bahnhof, bequeme Schuhe tragen. Dauer ca. 3 Stunden, Regenjacke mitnehmen.',
-    images: []
-  },
-  {
-    id: 'e-3',
-    title: 'Wintermarkt',
-    date: 'Fr, 30. November 2026',
-    time: '10:00 - 20:00',
-    location: 'Marktplatz',
-    description: 'Markt mit Kunsthandwerk, Punsch und Musik.',
-    details: 'Viele lokale Anbieter und eine Bühne mit Live-Acts. Eintritt frei.',
-    images: []
-  }
+
 ];
 
 function App() {
@@ -174,7 +155,7 @@ function App() {
           <div className="section__inner">
             <h2 className="section__title">Über uns</h2>
             <p className="section__lead">
-              Bitzli e.V. ist ein lokaler Verein, der Menschen aus der Umgebung vernetzt und gemeinsam
+              Bitzli Events ist ein lokaler Verein, der Menschen aus der Umgebung vernetzt und gemeinsam
               Veranstaltungen organisiert. Unser Ziel ist es, Gemeinschaft zu fördern und einen Raum für
               Austausch, Kultur und Freizeit zu schaffen.
             </p>
